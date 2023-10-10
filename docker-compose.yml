@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  # Браузер для рендеринга динамических страниц
+  splash:
+    image: "scrapinghub/splash"
+    ports:
+      - "8050:8050"

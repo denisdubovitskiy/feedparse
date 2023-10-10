@@ -1,0 +1,118 @@
+sources:
+  - name: AWS Architecture
+    url: https://aws.amazon.com/ru/blogs/architecture/
+    config:
+      article:
+        selector: article.blog-post
+        title:
+          selector: h2.blog-post-title a span
+        detail:
+          selector: h2.blog-post-title a
+  - name: AWS OpenSource
+    url: https://aws.amazon.com/ru/blogs/opensource/
+    config:
+      article:
+        selector: article.blog-post
+        title:
+          selector: h2.blog-post-title a span
+        detail:
+          selector: h2.blog-post-title a
+  - name: AWS ML
+    url: https://aws.amazon.com/ru/blogs/machine-learning/
+    config:
+      article:
+        selector: article.blog-post
+        title:
+          selector: h2.blog-post-title a span
+        detail:
+          selector: h2.blog-post-title a
+  - name: AWS DevOps
+    url: https://aws.amazon.com/ru/blogs/devops/
+    config:
+      article:
+        selector: article.blog-post
+        title:
+          selector: h2.blog-post-title a span
+        detail:
+          selector: h2.blog-post-title a
+  - name: AWS Devtools
+    url: https://aws.amazon.com/ru/blogs/developer/
+    config:
+      article:
+        selector: article.blog-post
+        title:
+          selector: h2.blog-post-title a span
+        detail:
+          selector: h2.blog-post-title a
+  - name: Three Dots Labs
+    url: https://threedots.tech
+    config:
+      article:
+        selector: article.post-entry
+        title:
+          selector: header.post-header > h3.post-title a
+        detail:
+          selector: header.post-header > h3.post-title a
+  - name: Zalando Tech
+    url: https://engineering.zalando.com/index.html
+    config:
+      article:
+        selector: article.article
+        title:
+          selector: h1.title > a
+        detail:
+          selector: h1.title > a
+  - name: Zendesk Engineering
+    url: https://zendesk.engineering/
+    config:
+      article:
+        selector: div.row > div.col > div.col
+        title:
+          selector: a > h3 > div
+        detail:
+          selector: a
+  - name: Yammer Engineering
+    url: https://medium.com/yammer-engineering
+    config:
+      article:
+        selector: div.row > div.col > div.col
+        title:
+          selector: a > h3 > div
+        detail:
+          selector: a
+  - name: Instagram Engineering
+    url: https://engineering.fb.com/tag/instagram/
+    config:
+      article:
+        selector: article.post
+        title:
+          selector: a
+        detail:
+          selector: header.entry-header div.entry-title a
+  - name: 99designs
+    url: https://99designs.com/blog/engineering/
+    config:
+      article:
+        selector: article.excerpt
+        title:
+          selector: div.excerpt__title > h5 a
+        detail:
+          selector: div.excerpt__title > h5 a
+  - name: Allegro
+    url: https://blog.allegro.tech/
+    config:
+      article:
+        selector: article
+        title:
+          selector: a.post-link
+        detail:
+          selector: a.post-link
+  - name: Airbnb
+    url: https://medium.com/airbnb-engineering
+    config:
+      article:
+        selector: div.row > div.col > div.col
+        title:
+          selector: a > h3 > div
+        detail:
+          selector: a
