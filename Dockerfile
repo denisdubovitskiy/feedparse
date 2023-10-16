@@ -1,7 +1,6 @@
 FROM golang:1.20.10-bullseye AS builder
-WORKDIR /builddir
 COPY . .
-RUN go build -o parser ./cmd/parser
+RUN mkdir /builddir/ && go build -o /builddir/parser ./cmd/parser
 
 FROM ubuntu:jammy
 WORKDIR /app
