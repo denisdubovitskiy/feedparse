@@ -18,13 +18,6 @@ func Run(ctx context.Context) error {
 	return chromedp.Run(ctx)
 }
 
-func Headless(a *chromedp.ExecAllocator) {
-	chromedp.Flag("headless", false)(a)
-	// Like in Puppeteer.
-	chromedp.Flag("hide-scrollbars", false)(a)
-	chromedp.Flag("mute-audio", false)(a)
-}
-
 func FetchHTML(ctx context.Context, url string) (string, error) {
 	var body string
 	return body, chromedp.Run(

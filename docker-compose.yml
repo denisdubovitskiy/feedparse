@@ -5,7 +5,23 @@ services:
     image: "chromedp/headless-shell:74.0.3717.1"
     ports:
       - "9223:9222"
+    volumes:
+      - /dev/shm:/dev/shm
     restart: unless-stopped
+    command:
+      - /headless-shell/headless-shell
+      - --no-sandbox
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --disable-gpu
+      - --headless
+      - --disable-dev-shm-usage
+      - --enable-logging=stderr
+      - --v=1"
+      - --hide-scrollbars
+      - --mute-audio
+      - --blink-settings
+      - imagesEnabled=false
 
   app:
     build:
