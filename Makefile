@@ -67,7 +67,7 @@ build-parser:
 	go build -o $(CURDIR)/bin/parser $(CURDIR)/cmd/parser
 
 build-image:
-	$(COMPOSE) build --no-cache app
+	$(COMPOSE) build app
 
 precommit: goimports build
 
