@@ -38,12 +38,6 @@ VALUES (sqlc.arg(source_id),
 ON CONFLICT (url)
     DO NOTHING;
 
--- name: SelectUnsent :many
-SELECT title, url
-FROM articles
-WHERE sent = 0
-ORDER BY source_id;
-
 -- name: LastTimestamp :one
 SELECT timestamp
 FROM timestamp
@@ -54,3 +48,18 @@ LIMIT 1;
 INSERT INTO timestamp (timestamp)
 VALUES (sqlc.arg(timestamp));
 COMMIT;
+
+-- name: SelectUnsent :one
+SELECT a.id,
+       a.title,
+       a.url,
+       s.name as source_name
+FROM articles as a
+JOIN sources s on s.id = a.source_id
+WHERE sent = 0
+LIMIT 1;
+
+-- name: MarkArticleSent :exec
+UPDATE articles
+SET sent = 1
+WHERE id = sqlc.arg(id);

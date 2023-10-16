@@ -51,6 +51,17 @@ func (q *Queries) LastTimestamp(ctx context.Context) (int64, error) {
 	return timestamp, err
 }
 
+const markArticleSent = `-- name: MarkArticleSent :exec
+UPDATE articles
+SET sent = 1
+WHERE id = ?1
+`
+
+func (q *Queries) MarkArticleSent(ctx context.Context, id int64) error {
+	_, err := q.db.ExecContext(ctx, markArticleSent, id)
+	return err
+}
+
 const resetRetries = `-- name: ResetRetries :exec
 UPDATE sources
 SET retries = 0
@@ -61,39 +72,36 @@ func (q *Queries) ResetRetries(ctx context.Context) error {
 	return err
 }
 
-const selectUnsent = `-- name: SelectUnsent :many
-SELECT title, url
-FROM articles
+const selectUnsent = `-- name: SelectUnsent :one
+COMMIT;
+
+SELECT a.id,
+       a.title,
+       a.url,
+       s.name as source_name
+FROM articles as a
+JOIN sources s on s.id = a.source_id
 WHERE sent = 0
-ORDER BY source_id
+LIMIT 1
 `
 
 type SelectUnsentRow struct {
-	Title string
-	Url   string
+	ID         int64
+	Title      string
+	Url        string
+	SourceName string
 }
 
-func (q *Queries) SelectUnsent(ctx context.Context) ([]SelectUnsentRow, error) {
-	rows, err := q.db.QueryContext(ctx, selectUnsent)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []SelectUnsentRow
-	for rows.Next() {
-		var i SelectUnsentRow
-		if err := rows.Scan(&i.Title, &i.Url); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
+func (q *Queries) SelectUnsent(ctx context.Context) (SelectUnsentRow, error) {
+	row := q.db.QueryRowContext(ctx, selectUnsent)
+	var i SelectUnsentRow
+	err := row.Scan(
+		&i.ID,
+		&i.Title,
+		&i.Url,
+		&i.SourceName,
+	)
+	return i, err
 }
 
 const setLastTimestamp = `-- name: SetLastTimestamp :exec

@@ -2,27 +2,10 @@ package config
 
 import "gopkg.in/yaml.v3"
 
-type Detail struct {
-	Selector string `yaml:"selector" json:"selector"`
-}
-
-type Title struct {
-	Selector string `yaml:"selector" json:"selector"`
-}
-
-type Next struct {
-	Selector string `yaml:"selector" json:"selector"`
-}
-
-type Article struct {
-	Selector string `yaml:"selector" json:"selector"`
-	Title    Title  `yaml:"title" json:"title"`
-	Detail   Detail `yaml:"detail" json:"detail"`
-	Next     Next   `yaml:"next" json:"next"`
-}
-
 type SourceConfig struct {
-	ArticleCard Article `yaml:"article" json:"article"`
+	ArticleSelector string `yaml:"article" json:"article"`
+	TitleSelector   string `yaml:"title" json:"title"`
+	DetailSelector  string `yaml:"detail" json:"detail"`
 }
 
 type Source struct {

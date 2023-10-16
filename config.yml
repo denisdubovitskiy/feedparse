@@ -2,117 +2,84 @@ sources:
   - name: AWS Architecture
     url: https://aws.amazon.com/ru/blogs/architecture/
     config:
-      article:
-        selector: article.blog-post
-        title:
-          selector: h2.blog-post-title a span
-        detail:
-          selector: h2.blog-post-title a
+      article: article.blog-post
+      title: h2.blog-post-title a span
+      detail: h2.blog-post-title a
   - name: AWS OpenSource
     url: https://aws.amazon.com/ru/blogs/opensource/
     config:
-      article:
-        selector: article.blog-post
-        title:
-          selector: h2.blog-post-title a span
-        detail:
-          selector: h2.blog-post-title a
+      article: article.blog-post
+      title: h2.blog-post-title a span
+      detail: h2.blog-post-title a
   - name: AWS ML
     url: https://aws.amazon.com/ru/blogs/machine-learning/
     config:
-      article:
-        selector: article.blog-post
-        title:
-          selector: h2.blog-post-title a span
-        detail:
-          selector: h2.blog-post-title a
+      article: article.blog-post
+      title: h2.blog-post-title a span
+      detail: h2.blog-post-title a
   - name: AWS DevOps
     url: https://aws.amazon.com/ru/blogs/devops/
     config:
-      article:
-        selector: article.blog-post
-        title:
-          selector: h2.blog-post-title a span
-        detail:
-          selector: h2.blog-post-title a
+      article: article.blog-post
+      title: h2.blog-post-title a span
+      detail: h2.blog-post-title a
   - name: AWS Devtools
     url: https://aws.amazon.com/ru/blogs/developer/
     config:
-      article:
-        selector: article.blog-post
-        title:
-          selector: h2.blog-post-title a span
-        detail:
-          selector: h2.blog-post-title a
+      article: article.blog-post
+      title: h2.blog-post-title a span
+      detail: h2.blog-post-title a
   - name: Three Dots Labs
     url: https://threedots.tech
     config:
-      article:
-        selector: article.post-entry
-        title:
-          selector: header.post-header > h3.post-title a
-        detail:
-          selector: header.post-header > h3.post-title a
-  - name: Zalando Tech
-    url: https://engineering.zalando.com/index.html
-    config:
-      article:
-        selector: article.article
-        title:
-          selector: h1.title > a
-        detail:
-          selector: h1.title > a
-  - name: Zendesk Engineering
-    url: https://zendesk.engineering/
-    config:
-      article:
-        selector: div.row > div.col > div.col
-        title:
-          selector: a > h3 > div
-        detail:
-          selector: a
-  - name: Yammer Engineering
-    url: https://medium.com/yammer-engineering
-    config:
-      article:
-        selector: div.row > div.col > div.col
-        title:
-          selector: a > h3 > div
-        detail:
-          selector: a
+      article: article.post-entry
+      title: header.post-header > h3.post-title a
+      detail: header.post-header > h3.post-title a
   - name: Instagram Engineering
     url: https://engineering.fb.com/tag/instagram/
     config:
-      article:
-        selector: article.post
-        title:
-          selector: a
-        detail:
-          selector: header.entry-header div.entry-title a
-  - name: 99designs
-    url: https://99designs.com/blog/engineering/
+      article: article.post
+      title: a
+      detail: header.entry-header div.entry-title a
+  - name: Facebook core infra
+    url: https://engineering.fb.com/category/core-infra/
     config:
-      article:
-        selector: article.excerpt
-        title:
-          selector: div.excerpt__title > h5 a
-        detail:
-          selector: div.excerpt__title > h5 a
+      article: article.post
+      title: a
+      detail: header.entry-header div.entry-title a
+  - name: Facebook data infra
+    url: https://engineering.fb.com/category/data-infrastructure/
+    config:
+      article: article.post
+      title: a
+      detail: header.entry-header div.entry-title a
+  - name: Facebook devtools
+    url: https://engineering.fb.com/category/developer-tools/
+    config:
+      article: article.post
+      title: a
+      detail: header.entry-header div.entry-title a
+  - name: Facebook production engineering
+    url: https://engineering.fb.com/category/production-engineering/
+    config:
+      article: article.post
+      title: a
+      detail: header.entry-header div.entry-title a
+  - name: Facebook Security
+    url: https://engineering.fb.com/category/security/
+    config:
+      article: article.post
+      title: a
+      detail: header.entry-header div.entry-title a
   - name: Allegro
     url: https://blog.allegro.tech/
     config:
-      article:
-        selector: article
-        title:
-          selector: a.post-link
-        detail:
-          selector: a.post-link
+      article: article
+      title: a.post-link
+      detail: a.post-link
   - name: Airbnb
     url: https://medium.com/airbnb-engineering
     config:
-      article:
-        selector: div.row > div.col > div.col
-        title:
-          selector: a > h3 > div
-        detail:
-          selector: a
+      article: div.row > div.col > div.col
+      title: a > h3 > div
+      detail: a
