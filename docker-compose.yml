@@ -12,7 +12,7 @@ services:
       - /headless-shell/headless-shell
       - --no-sandbox
       - --remote-debugging-address=0.0.0.0
-      - --remote-debugging-port=9222
+      - --remote-debugging-port=9223
       - --disable-gpu
       - --headless
       - --use-gl=angle
@@ -22,8 +22,7 @@ services:
       - --v=1
       - --hide-scrollbars
       - --mute-audio
-      - --blink-settings
-      - imagesEnabled=false
+      - --blink-settings=imagesEnabled=false
 
   app:
     build:
