@@ -4,7 +4,7 @@ services:
   chrome:
     image: "chromedp/headless-shell:74.0.3717.1"
     ports:
-      - "9223:9222"
+      - "9223:9223"
     volumes:
       - /dev/shm:/dev/shm
     restart: unless-stopped
