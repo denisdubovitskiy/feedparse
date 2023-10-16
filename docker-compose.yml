@@ -19,7 +19,7 @@ services:
       - --use-angle=swiftshader
       - --disable-dev-shm-usage
       - --enable-logging=stderr
-      - --v=1"
+      - --v=1
       - --hide-scrollbars
       - --mute-audio
       - --blink-settings
