@@ -37,7 +37,7 @@ func FetchHTML(ctx context.Context, url string) (string, error) {
 	)
 }
 
-func NewContext() (context.Context, context.CancelFunc) {
+func NewLocalContext() (context.Context, context.CancelFunc) {
 	tempDir, err := os.MkdirTemp("", "chromedp")
 	if err != nil {
 		panic(fmt.Sprintf("browser-context: unable to create a temp directory: %s", err.Error()))
@@ -59,6 +59,17 @@ func NewContext() (context.Context, context.CancelFunc) {
 		cancelAllocCtx()
 		cancelBrowserCtx()
 		_ = os.RemoveAll(tempDir)
+	}
+}
+
+func NewRemoteContext(url string) (context.Context, context.CancelFunc) {
+	allocCtx, cancelAllocCtx := chromedp.NewRemoteAllocator(context.Background(), url)
+	browserCtx, cancelBrowserCtx := chromedp.NewContext(allocCtx, chromedp.WithLogf(log.Printf))
+	chromedp.ListenTarget(browserCtx, DisableFetchExceptScripts(browserCtx))
+
+	return browserCtx, func() {
+		cancelAllocCtx()
+		cancelBrowserCtx()
 	}
 }
 

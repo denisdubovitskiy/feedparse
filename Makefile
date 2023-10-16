@@ -1,8 +1,13 @@
 # Запуск:
-# make splash-start - запускаем браузер
+# make chrome-start - запускаем браузер
 # make update-config - обновляем конфиг и инициализируем базу
 # make generate - генерируем гошный код
 # make run - запускаем парсер
+
+ifneq (,$(wildcard ./.env))
+	include .env
+	export
+endif
 
 bin-deps:
 	@ls $(CURDIR)/bin/sqlc &> /dev/null || GOBIN=$(CURDIR)/bin go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
@@ -21,16 +26,16 @@ COMPOSE := docker-compose \
 ps:
 	$(COMPOSE) ps
 
-splash-start:
-	$(COMPOSE) up --detach splash
+chrome-start:
+	$(COMPOSE) up --detach chrome
 
-splash-stop:
-	$(COMPOSE) stop splash
+chrome-stop:
+	$(COMPOSE) stop chrome
 
-splash-restart: splash-stop splash-start
+chrome-restart: chrome-stop chrome-start
 
-splash-rm: splash-stop
-	$(COMPOSE) rm --force splash
+chrome-rm: chrome-stop
+	$(COMPOSE) rm --force chrome
 
 update-config:
 	go run $(CURDIR)/cmd/config/main.go \
@@ -47,10 +52,16 @@ clean:
 build:
 	go build $(CURDIR)/...
 
+build-parser:
+	go build -o $(CURDIR)/bin/parser $(CURDIR)/cmd/parser
+
+build-image:
+	$(COMPOSE) build app
+
 precommit: goimports build
 
-runall: splash-start update-config generate run
+runall: chrome-start update-config generate run
 
-.PHONY: bin-deps generate splash-start splash-stop \
-	splash-restart splash-rm update-config run clean \
-	goimports precommit runall
+.PHONY: bin-deps generate chrome-start chrome-stop \
+	chrome-restart chrome-rm update-config run clean \
+	goimports precommit runall build-parser build-image

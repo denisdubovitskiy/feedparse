@@ -1,7 +1,14 @@
 version: "3.8"
 services:
   # Браузер для рендеринга динамических страниц
-  splash:
-    image: "scrapinghub/splash"
+  chrome:
+    image: "chromedp/headless-shell:74.0.3717.1"
     ports:
-      - "8050:8050"
+      - "9223:9222"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
