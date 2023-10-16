@@ -50,7 +50,7 @@ app-rm: app-stop
 
 update-config:
 	go run $(CURDIR)/cmd/config/main.go \
-		-config $(CURDIR)/config.yml \
+		-config $(CURDIR)/config/config.yml \
 		-database $(CURDIR)/database.sqlite3
 
 run:
