@@ -5,6 +5,7 @@ services:
     image: "chromedp/headless-shell:74.0.3717.1"
     ports:
       - "9223:9222"
+    restart: unless-stopped
 
   app:
     build:
@@ -12,3 +13,4 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    restart: unless-stopped

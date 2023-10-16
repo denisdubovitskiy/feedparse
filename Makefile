@@ -37,6 +37,17 @@ chrome-restart: chrome-stop chrome-start
 chrome-rm: chrome-stop
 	$(COMPOSE) rm --force chrome
 
+app-start:
+	$(COMPOSE) up --detach app
+
+app-stop:
+	$(COMPOSE) stop app
+
+app-restart: app-stop app-start
+
+app-rm: app-stop
+	$(COMPOSE) rm --force app
+
 update-config:
 	go run $(CURDIR)/cmd/config/main.go \
 		-config $(CURDIR)/config.yml \
