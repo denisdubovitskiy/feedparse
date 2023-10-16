@@ -30,4 +30,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    volumes:
+      - ./config:/config
     restart: unless-stopped
