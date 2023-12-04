@@ -1,4 +1,4 @@
-FROM golang:1.20.10-bullseye AS builder
+FROM golang:1.21.4-bullseye AS builder
 WORKDIR /builddir
 COPY . .
 RUN go build -o /builddir/parser ./cmd/parser
