@@ -1,4 +1,10 @@
 sources:
+  - name: Eli Bendersky
+    url: https://eli.thegreenplace.net/tag/go
+    config:
+      article: table.archive-list tbody tr td
+      title: a
+      detail: a
   - name: Habr Go
     url: https://habr.com/ru/hubs/go/articles/
     config:
