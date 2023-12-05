@@ -1,4 +1,22 @@
 sources:
+  - name: Russel Cox
+    url: https://research.swtch.com
+    config:
+      article: ul.toc li
+      title: a
+      detail: a
+  - name: Bitfield consulting
+    url: https://bitfieldconsulting.com/golang/
+    config:
+      article: article.entry
+      title: h2 a
+      detail: h2 a
+  - name: Alex Edwards
+    url: https://www.alexedwards.net/blog
+    config:
+      article: ol.articles li
+      title: a
+      detail: a
   - name: Eli Bendersky
     url: https://eli.thegreenplace.net/tag/go
     config:
