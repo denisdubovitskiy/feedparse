@@ -1,4 +1,10 @@
 sources:
+  - name: Habr Go
+    url: https://habr.com/ru/hubs/go/articles/
+    config:
+      article: div.tm-articles-list article
+      title: h2.tm-title a
+      detail: h2.tm-title a
   - name: Ardanlabs
     url: https://www.ardanlabs.com/blog/
     config:
