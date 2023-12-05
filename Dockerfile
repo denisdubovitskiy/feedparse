@@ -8,4 +8,5 @@ FROM ubuntu:jammy
 WORKDIR /app
 COPY --from=builder /builddir/parser /app/parser
 COPY --from=builder /builddir/config /app/config
+RUN apt install --yes ca-certificates
 CMD ["/app/parser"]
