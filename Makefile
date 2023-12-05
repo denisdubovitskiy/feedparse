@@ -19,9 +19,12 @@ generate: bin-deps
 goimports:
 	PATH=$(CURDIR)/bin goimports -w $(CURDIR)/
 
+
 COMPOSE := docker-compose \
 	--file $(CURDIR)/docker-compose.yml \
 	--project-name feedparser
+
+DATABASE := $(CURDIR)/storage/database.sqlite3
 
 ps:
 	$(COMPOSE) ps
@@ -51,14 +54,14 @@ app-rm: app-stop
 update-config:
 	go run $(CURDIR)/cmd/config/main.go \
 		-config $(CURDIR)/config/config.yml \
-		-database $(CURDIR)/database.sqlite3
+		-database $(DATABASE)
 
 run:
 	go run $(CURDIR)/cmd/parser/main.go \
-		-database $(CURDIR)/database.sqlite3
+		-database $(DATABASE)
 
 clean:
-	$(RM) $(CURDIR)/database.sqlite3
+	$(RM) $(DATABASE)
 
 build:
 	go build $(CURDIR)/...
