@@ -3,9 +3,10 @@ package config
 import "gopkg.in/yaml.v3"
 
 type SourceConfig struct {
-	ArticleSelector string `yaml:"article" json:"article"`
-	TitleSelector   string `yaml:"title" json:"title"`
-	DetailSelector  string `yaml:"detail" json:"detail"`
+	ArticleSelector string   `yaml:"article" json:"article"`
+	TitleSelector   string   `yaml:"title" json:"title"`
+	DetailSelector  string   `yaml:"detail" json:"detail"`
+	Tags            []string `yaml:"tags"`
 }
 
 type Source struct {

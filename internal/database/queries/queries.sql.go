@@ -78,7 +78,8 @@ COMMIT;
 SELECT a.id,
        a.title,
        a.url,
-       s.name as source_name
+       s.name as source_name,
+       s.config as config
 FROM articles as a
 JOIN sources s on s.id = a.source_id
 WHERE sent = 0
@@ -90,6 +91,7 @@ type SelectUnsentRow struct {
 	Title      string
 	Url        string
 	SourceName string
+	Config     string
 }
 
 func (q *Queries) SelectUnsent(ctx context.Context) (SelectUnsentRow, error) {
@@ -100,6 +102,7 @@ func (q *Queries) SelectUnsent(ctx context.Context) (SelectUnsentRow, error) {
 		&i.Title,
 		&i.Url,
 		&i.SourceName,
+		&i.Config,
 	)
 	return i, err
 }

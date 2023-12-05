@@ -25,10 +25,8 @@ type Publisher struct {
 	channel string
 }
 
-var tgbotapiErr tgbotapi.Error
-
-func (p *Publisher) PublishPost(source, title, url string) error {
-	text := formatMessage(source, title, url)
+func (p *Publisher) PublishPost(source, title, url string, tags []string) error {
+	text := formatMessage(source, title, url, tags)
 	msg := tgbotapi.NewMessageToChannel(p.channel, text)
 	msg.ParseMode = tgbotapi.ModeMarkdown
 	_, err := p.client.Send(msg)
@@ -65,8 +63,29 @@ func retryError(err error, after int) error {
 	return RetryError{err: err, after: after}
 }
 
-const template = `%s: [%s](%s)`
+const (
+	templateBase     = `%s: [%s](%s)`
+	templateWithTags = `%s: [%s](%s)
+%s
+`
+)
 
-func formatMessage(source, title, url string) string {
-	return fmt.Sprintf(template, source, title, url)
+func formatMessage(source, title, url string, tags []string) string {
+	if len(tags) == 0 {
+		return fmt.Sprintf(templateBase, source, title, url)
+	}
+
+	return fmt.Sprintf(templateWithTags, source, title, url, formatTags(tags))
+}
+
+func formatTags(tags []string) string {
+	tagsWithHashtag := make([]string, len(tags))
+	for i, t := range tags {
+		if !strings.HasPrefix(t, "#") {
+			t = "#" + t
+		}
+		tagsWithHashtag[i] = t
+	}
+
+	return strings.Join(tagsWithHashtag, ", ")
 }

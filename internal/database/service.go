@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"sync"
 
@@ -55,6 +56,7 @@ type Article struct {
 	Title  string
 	URL    string
 	Source string
+	Tags   []string
 }
 
 func (a Article) String() string {
@@ -78,10 +80,16 @@ func (s *Service) SelectUnsent(ctx context.Context, f func(a Article) error) err
 		return err
 	}
 
+	var conf config.SourceConfig
+	if err := json.Unmarshal([]byte(article.Config), &conf); err != nil {
+		return err
+	}
+
 	fnErr := f(Article{
 		Title:  article.Title,
 		URL:    article.Url,
 		Source: article.SourceName,
+		Tags:   conf.Tags,
 	})
 	if fnErr != nil {
 		_ = tx.Rollback()

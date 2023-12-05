@@ -53,7 +53,8 @@ COMMIT;
 SELECT a.id,
        a.title,
        a.url,
-       s.name as source_name
+       s.name as source_name,
+       s.config as config
 FROM articles as a
 JOIN sources s on s.id = a.source_id
 WHERE sent = 0

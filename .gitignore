@@ -1,5 +1,5 @@
 /.idea
 /.vscode
 /bin
-/storage
+*.sqlite3
 /.env

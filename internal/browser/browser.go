@@ -22,6 +22,7 @@ func FetchHTML(ctx context.Context, url string) (string, error) {
 	return body, chromedp.Run(
 		ctx,
 		fetch.Enable(),
+		// Почему-то не работает в образе.
 		// media.Disable(),
 		chromedp.Navigate(url),
 		chromedp.Sleep(time.Second),

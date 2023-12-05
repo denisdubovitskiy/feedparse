@@ -8,6 +8,7 @@ import (
 	"log"
 	"log/slog"
 	"os"
+	"path/filepath"
 
 	"github.com/denisdubovitskiy/feedparser/internal/config"
 	"github.com/denisdubovitskiy/feedparser/internal/database"
@@ -33,6 +34,10 @@ func main() {
 	conf, err := config.Parse(configContent)
 	if err != nil {
 		log.Fatalf("config: unable to parse config file %source: %v", err)
+	}
+
+	if err := os.MkdirAll(filepath.Dir(databasePath), os.ModePerm); err != nil {
+		log.Fatalf("config: unable to create a directory for a database: %v", err)
 	}
 
 	db, err := database.Open(databasePath)
