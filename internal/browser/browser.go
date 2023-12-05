@@ -9,7 +9,6 @@ import (
 
 	"github.com/chromedp/cdproto/cdp"
 	"github.com/chromedp/cdproto/fetch"
-	"github.com/chromedp/cdproto/media"
 	"github.com/chromedp/cdproto/network"
 	"github.com/chromedp/chromedp"
 )
@@ -23,7 +22,7 @@ func FetchHTML(ctx context.Context, url string) (string, error) {
 	return body, chromedp.Run(
 		ctx,
 		fetch.Enable(),
-		media.Disable(),
+		// media.Disable(),
 		chromedp.Navigate(url),
 		chromedp.Sleep(time.Second),
 		chromedp.InnerHTML(`html`, &body),

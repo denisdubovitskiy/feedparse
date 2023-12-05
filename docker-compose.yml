@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   # Браузер для рендеринга динамических страниц
+  # https://peter.sh/experiments/chromium-command-line-switches/
   chrome:
     image: "chromedp/headless-shell:74.0.3717.1"
     ports:
@@ -17,12 +18,19 @@ services:
       - --headless
       - --use-gl=angle
       - --use-angle=swiftshader
+      - --password-store=basic
+      - --use-mock-keychain
       - --disable-dev-shm-usage
+      - --disable-extensions
       - --enable-logging=stderr
       - --v=1
       - --hide-scrollbars
       - --mute-audio
       - --blink-settings=imagesEnabled=false
+      - --enable-features=NetworkService,NetworkServiceInProcess
+      - --disable-background-networking
+      - --disable-backgrounding-occluded-windows
+      
 
   app:
     build:
