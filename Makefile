@@ -20,7 +20,7 @@ goimports:
 	PATH=$(CURDIR)/bin goimports -w $(CURDIR)/
 
 
-COMPOSE := docker-compose \
+COMPOSE := docker compose \
 	--file $(CURDIR)/docker-compose.yml \
 	--project-name feedparser
 
