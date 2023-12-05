@@ -37,5 +37,5 @@ services:
     command:
       - "/app/parser"
       - "-database"
-      - "storage/database.sqlite3"
+      - "/storage/database.sqlite3"
      
