@@ -1,40 +1,66 @@
 sources:
+  - name: Mathias Lafeldt
+    url: https://sharpend.io/archives/
+    config:
+      article: article
+      title: a
+      detail: a
+  - name: Applied Go
+    url: https://appliedgo.com/blog
+    config:
+      article: div.zbv-blog-04-content
+      title: a:nth-child(2) h3
+      detail: a:nth-child(2)
+      tags: [go]
+  - name: The Go Blog
+    url: https://go.dev/blog/
+    config:
+      article: p.blogtitle
+      title: a
+      detail: a
+      tags: [go]
   - name: Bitfield consulting
     url: https://bitfieldconsulting.com/golang/
     config:
       article: article.entry
       title: h2 a
       detail: h2 a
+      tags: [go]
   - name: Alex Edwards
     url: https://www.alexedwards.net/blog
     config:
       article: ol.articles li
       title: a
       detail: a
+      tags: [go]
   - name: Eli Bendersky
     url: https://eli.thegreenplace.net/tag/go
     config:
       article: table.archive-list tbody tr td
       title: a
       detail: a
+      tags: [go]
   - name: Habr Go
     url: https://habr.com/ru/hubs/go/articles/
     config:
       article: div.tm-articles-list article
       title: h2.tm-title a
       detail: h2.tm-title a
+      tags: [go]
   - name: Ardanlabs
     url: https://www.ardanlabs.com/blog/
     config:
       article: div.post-teaser
       title: header > h1 > a.post-link
       detail: header > h1 > a.post-link
+      tags: [go]
   - name: Dave Cheney
     url: https://dave.cheney.net/
     config:
       article: article.post
       title: header > h1 > a
       detail: header > h1 > a
+      tags: [go]
   - name: AWS Architecture
     url: https://aws.amazon.com/ru/blogs/architecture/
     config:

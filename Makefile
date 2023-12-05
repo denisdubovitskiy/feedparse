@@ -9,9 +9,11 @@ ifneq (,$(wildcard ./.env))
 	export
 endif
 
+bin-deps: export GOBIN := $(CURDIR)/bin
 bin-deps:
-	@ls $(CURDIR)/bin/sqlc &> /dev/null || GOBIN=$(CURDIR)/bin go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
-	@ls $(CURDIR)/bin/goimports &> /dev/null || GOBIN=$(CURDIR)/bin go install golang.org/x/tools/cmd/goimports@latest
+	go install github.com/sqlc-dev/sqlc/cmd/sqlc@v1.24.0
+	go install golang.org/x/tools/cmd/goimports@v0.16.0
+	go install github.com/gojuno/minimock/v3/cmd/minimock@v3.1.3
 
 generate: bin-deps
 	PATH=$(CURDIR)/bin sqlc generate

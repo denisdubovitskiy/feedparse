@@ -4,8 +4,6 @@
 
 package queries
 
-import ()
-
 type Article struct {
 	ID       int64
 	SourceID int64
