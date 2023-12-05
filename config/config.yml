@@ -83,3 +83,9 @@ sources:
       article: div.row > div.col > div.col
       title: a > h3 > div
       detail: a
+  - name: Ardanlabs
+    url: https://www.ardanlabs.com/blog/
+    config:
+      article: div.post-teaser
+      title: header > h1 > a.post-link
+      detail: header > h1 > a.post-link
