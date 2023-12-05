@@ -25,7 +25,7 @@ type Publisher struct {
 	channel string
 }
 
-func (p *Publisher) PublishPost(source, title, url string, tags []string) error {
+func (p *Publisher) PublishPost(source, title, url, channel string, tags []string) error {
 	text := formatMessage(source, title, url, tags)
 	msg := tgbotapi.NewMessageToChannel(p.channel, text)
 	msg.ParseMode = tgbotapi.ModeMarkdown

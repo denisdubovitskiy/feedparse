@@ -53,10 +53,11 @@ func (s *Service) SaveArticle(ctx context.Context, params SaveArticleParams) err
 }
 
 type Article struct {
-	Title  string
-	URL    string
-	Source string
-	Tags   []string
+	Title   string
+	URL     string
+	Source  string
+	Channel string
+	Tags    []string
 }
 
 func (a Article) String() string {
@@ -86,10 +87,11 @@ func (s *Service) SelectUnsent(ctx context.Context, f func(a Article) error) err
 	}
 
 	fnErr := f(Article{
-		Title:  article.Title,
-		URL:    article.Url,
-		Source: article.SourceName,
-		Tags:   conf.Tags,
+		Title:   article.Title,
+		URL:     article.Url,
+		Source:  article.SourceName,
+		Channel: conf.Channel,
+		Tags:    conf.Tags,
 	})
 	if fnErr != nil {
 		_ = tx.Rollback()

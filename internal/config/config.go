@@ -3,10 +3,13 @@ package config
 import "gopkg.in/yaml.v3"
 
 type SourceConfig struct {
-	ArticleSelector string   `yaml:"article" json:"article"`
-	TitleSelector   string   `yaml:"title" json:"title"`
-	DetailSelector  string   `yaml:"detail" json:"detail"`
-	Tags            []string `yaml:"tags"`
+	ArticleSelector string `yaml:"article" json:"article"`
+	TitleSelector   string `yaml:"title" json:"title"`
+	DetailSelector  string `yaml:"detail" json:"detail"`
+	// Tags теги, которые будут отрисованы в сообщении.
+	Tags []string `yaml:"tags"`
+	// Channel переопределяет канал для отсылки.
+	Channel string `yaml:"channel"`
 }
 
 type Source struct {

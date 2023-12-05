@@ -146,7 +146,7 @@ func main() {
 					sendErr := service.SelectUnsent(context.Background(), func(article database.Article) error {
 						log.Printf("sender: sending article %s", article.String())
 
-						if err := publisher.PublishPost(article.Source, article.Title, article.URL, article.Tags); err != nil {
+						if err := publisher.PublishPost(article.Source, article.Title, article.URL, article.Channel, article.Tags); err != nil {
 							if after, ok := telegram.CanRetry(err); ok {
 								sendAfter = time.Now().Add(time.Duration(after) * time.Second)
 								log.Printf("sender: rate limit exceeded, retrying after %d seconds", after)
