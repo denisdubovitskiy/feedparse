@@ -1,4 +1,16 @@
 sources:
+  - name: Ardanlabs
+    url: https://www.ardanlabs.com/blog/
+    config:
+      article: div.post-teaser
+      title: header > h1 > a.post-link
+      detail: header > h1 > a.post-link
+  - name: Dave Cheney
+    url: https://dave.cheney.net/
+    config:
+      article: article.post
+      title: header > h1 > a
+      detail: header > h1 > a
   - name: AWS Architecture
     url: https://aws.amazon.com/ru/blogs/architecture/
     config:
