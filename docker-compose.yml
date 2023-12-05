@@ -32,4 +32,10 @@ services:
       - .env
     volumes:
       - ./config:/config
+      - ./storage:/storage
     restart: unless-stopped
+    command:
+      - "/app/parser"
+      - "-database"
+      - "storage/database.sqlite3"
+     
