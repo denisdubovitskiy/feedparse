@@ -59,7 +59,9 @@ func (p *Parser) Parse(source Source, body string) ([]Article, error) {
 
 		// Относительные ссылки
 		if strings.HasPrefix(detailURL, "./") ||
-			strings.HasPrefix(detailURL, "/") {
+			strings.HasPrefix(detailURL, "/") ||
+			!strings.HasPrefix(detailURL, "http://") ||
+			!strings.HasPrefix(detailURL, "https://") {
 
 			u, err := url.Parse(source.URL)
 			if err != nil {
