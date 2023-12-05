@@ -7,11 +7,11 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func NewPublisher(token, channel string) *Publisher {
-	client, err := tgbotapi.NewBotAPI(token)
-	if err != nil {
-		panic(fmt.Sprintf("unable to initialize telegram client: %v", err))
-	}
+type Client interface {
+	Send(c tgbotapi.Chattable) (tgbotapi.Message, error)
+}
+
+func NewWithClient(client Client, channel string) *Publisher {
 	channel = strings.TrimPrefix(channel, "@")
 	channel = "@" + channel
 	return &Publisher{
@@ -20,25 +20,53 @@ func NewPublisher(token, channel string) *Publisher {
 	}
 }
 
+func NewPublisher(token, channel string) *Publisher {
+	client, err := tgbotapi.NewBotAPI(token)
+	if err != nil {
+		panic(fmt.Sprintf("unable to initialize telegram client: %v", err))
+	}
+
+	return NewWithClient(client, channel)
+}
+
 type Publisher struct {
-	client  *tgbotapi.BotAPI
+	client  Client
 	channel string
 }
 
-func (p *Publisher) PublishPost(source, title, url, channel string, tags []string) error {
-	text := formatMessage(source, title, url, tags)
-	msg := tgbotapi.NewMessageToChannel(p.channel, text)
-	msg.ParseMode = tgbotapi.ModeMarkdown
-	_, err := p.client.Send(msg)
-	if err != nil {
-		if e, ok := err.(*tgbotapi.Error); ok {
-			if e.RetryAfter > 0 {
-				return retryError(e, e.RetryAfter)
-			}
-		}
-		return err
+func (p *Publisher) PublishPost(source, title, url string, channels, tags []string) error {
+
+	var channelsToSend []string
+
+	if len(channels) == 0 {
+		channelsToSend = append(channelsToSend, p.channel)
+	} else {
+		channelsToSend = channels
 	}
+
+	text := formatMessage(source, title, url, tags)
+
+	for _, channel := range channelsToSend {
+		msg := newMarkdownMessage(channel, text)
+
+		if _, err := p.client.Send(msg); err != nil {
+			if e, ok := err.(*tgbotapi.Error); ok {
+				if e.RetryAfter > 0 {
+					return retryError(e, e.RetryAfter)
+				}
+			}
+
+			return fmt.Errorf("publisher: unable to send a message: %w", err)
+		}
+	}
+
 	return nil
+}
+
+func newMarkdownMessage(channel, text string) tgbotapi.MessageConfig {
+	msg := tgbotapi.NewMessageToChannel(channel, text)
+	msg.ParseMode = tgbotapi.ModeMarkdown
+	return msg
 }
 
 type RetryError struct {

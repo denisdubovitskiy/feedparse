@@ -9,7 +9,7 @@ type SourceConfig struct {
 	// Tags теги, которые будут отрисованы в сообщении.
 	Tags []string `yaml:"tags"`
 	// Channel переопределяет канал для отсылки.
-	Channel string `yaml:"channel"`
+	Channels []string `yaml:"channels"`
 }
 
 type Source struct {

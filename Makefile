@@ -15,6 +15,7 @@ bin-deps:
 
 generate: bin-deps
 	PATH=$(CURDIR)/bin sqlc generate
+	PATH=$(CURDIR)/bin:$$PATH go generate $(CURDIR)/...
 
 goimports:
 	PATH=$(CURDIR)/bin goimports -w $(CURDIR)/
