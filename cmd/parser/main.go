@@ -36,6 +36,7 @@ var (
 	confBrowserURL         = os.Getenv("CRAWLER_BROWSER_URL")
 	confBrowserLocation    = os.Getenv("CRAWLER_BROWSER_LOCATION")
 	confCrawlInterval      = env("CRAWLER_CRAWL_INTERVAL", "5m0s")
+	confSendInterval       = env("CRAWLER_SEND_INTERVAL", "5m0s")
 	confIsPublisherEnabled = env("CRAWLER_PUBLISHER_ENABLED", "false") != "true"
 )
 
@@ -143,7 +144,13 @@ func main() {
 
 	if confIsPublisherEnabled {
 		publisher := telegram.NewPublisher(confToken, confDefaultChannel)
-		sendTicker := time.NewTicker(2 * time.Second)
+		sendInterval, err := time.ParseDuration(confSendInterval)
+		if err != nil {
+			log.Fatalf("crawler: unable to parse send interval %s: %v", confSendInterval, err)
+		}
+		log.Printf("sender: enabling sender with interval %s\n", sendInterval.String())
+
+		sendTicker := time.NewTicker(sendInterval)
 
 		go func() {
 			defer sendTicker.Stop()
