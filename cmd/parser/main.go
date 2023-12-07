@@ -5,9 +5,11 @@ import (
 	"database/sql"
 	"errors"
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -37,7 +39,7 @@ var (
 	confBrowserLocation    = os.Getenv("CRAWLER_BROWSER_LOCATION")
 	confCrawlInterval      = env("CRAWLER_CRAWL_INTERVAL", "5m0s")
 	confSendInterval       = env("CRAWLER_SEND_INTERVAL", "5m0s")
-	confIsPublisherEnabled = env("CRAWLER_PUBLISHER_ENABLED", "false") != "true"
+	confIsPublisherEnabled = env("CRAWLER_PUBLISHER_ENABLED", "false") == "true"
 )
 
 func env(key, defaultValue string) string {
@@ -49,6 +51,14 @@ func env(key, defaultValue string) string {
 }
 
 func main() {
+	fmt.Println("CRAWLER_TG_TOKEN", strings.Repeat("*", len(confToken)))
+	fmt.Println("CRAWLER_TG_CHANNEL", confDefaultChannel)
+	fmt.Println("CRAWLER_BROWSER_URL", confBrowserURL)
+	fmt.Println("CRAWLER_BROWSER_LOCATION", confBrowserLocation)
+	fmt.Println("CRAWLER_CRAWL_INTERVAL", confCrawlInterval)
+	fmt.Println("CRAWLER_SEND_INTERVAL", confSendInterval)
+	fmt.Println("CRAWLER_PUBLISHER_ENABLED", confIsPublisherEnabled)
+
 	appCtx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT)
 	defer cancel()
 
