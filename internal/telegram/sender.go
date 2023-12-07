@@ -47,7 +47,7 @@ func (p *Publisher) PublishPost(source, title, url string, channels, tags []stri
 	text := formatMessage(source, title, url, tags)
 
 	for _, channel := range channelsToSend {
-		msg := newMarkdownMessage(channel, text)
+		msg := newMarkdownMessage(formatChannel(channel), text)
 
 		if _, err := p.client.Send(msg); err != nil {
 			if e, ok := err.(*tgbotapi.Error); ok {
@@ -61,6 +61,14 @@ func (p *Publisher) PublishPost(source, title, url string, channels, tags []stri
 	}
 
 	return nil
+}
+
+func formatChannel(channel string) string {
+	if strings.HasPrefix(channel, "@") {
+		return channel
+	}
+
+	return "@" + channel
 }
 
 func newMarkdownMessage(channel, text string) tgbotapi.MessageConfig {
