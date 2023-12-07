@@ -11,7 +11,7 @@ sources:
       article: div.zbv-blog-04-content
       title: a:nth-child(2) h3
       detail: a:nth-child(2)
-      tags: [go]
+      channels: [tech_blogs_go]
   - name: The Go Blog
     url: https://go.dev/blog/
     config:
@@ -19,48 +19,56 @@ sources:
       title: a
       detail: a
       tags: [go]
+      channels: [tech_blogs_go]
   - name: Bitfield consulting
     url: https://bitfieldconsulting.com/golang/
     config:
       article: article.entry
       title: h2 a
       detail: h2 a
-      tags: [go]
+      channels: [tech_blogs_go]
   - name: Alex Edwards
     url: https://www.alexedwards.net/blog
     config:
       article: ol.articles li
       title: a
       detail: a
-      tags: [go]
+      channels: [tech_blogs_go]
   - name: Eli Bendersky
     url: https://eli.thegreenplace.net/tag/go
     config:
       article: table.archive-list tbody tr td
       title: a
       detail: a
-      tags: [go]
+      channels: [tech_blogs_go]
   - name: Habr Go
     url: https://habr.com/ru/hubs/go/articles/
     config:
       article: div.tm-articles-list article
       title: h2.tm-title a
       detail: h2.tm-title a
-      tags: [go]
+      channels: [tech_blogs_go]
   - name: Ardanlabs
     url: https://www.ardanlabs.com/blog/
     config:
       article: div.post-teaser
       title: header > h1 > a.post-link
       detail: header > h1 > a.post-link
-      tags: [go]
+      channels: [tech_blogs_go]
   - name: Dave Cheney
     url: https://dave.cheney.net/
     config:
       article: article.post
       title: header > h1 > a
       detail: header > h1 > a
-      tags: [go]
+      channels: [tech_blogs_go]
+  - name: Three Dots Labs
+    url: https://threedots.tech
+    config:
+      article: article.post-entry
+      title: header.post-header > h3.post-title a
+      detail: header.post-header > h3.post-title a
+      channels: [tech_blogs_go]
   - name: AWS Architecture
     url: https://aws.amazon.com/ru/blogs/architecture/
     config:
@@ -79,6 +87,7 @@ sources:
       article: article.blog-post
       title: h2.blog-post-title a span
       detail: h2.blog-post-title a
+      channels: [tech_blogs_ml]
   - name: AWS DevOps
     url: https://aws.amazon.com/ru/blogs/devops/
     config:
@@ -91,12 +100,6 @@ sources:
       article: article.blog-post
       title: h2.blog-post-title a span
       detail: h2.blog-post-title a
-  - name: Three Dots Labs
-    url: https://threedots.tech
-    config:
-      article: article.post-entry
-      title: header.post-header > h3.post-title a
-      detail: header.post-header > h3.post-title a
   - name: Instagram Engineering
     url: https://engineering.fb.com/tag/instagram/
     config:
@@ -127,6 +130,7 @@ sources:
       article: article.post
       title: a
       detail: header.entry-header div.entry-title a
+      channels: [tech_blogs_eng]
   - name: Facebook Security
     url: https://engineering.fb.com/category/security/
     config:
@@ -139,15 +143,11 @@ sources:
       article: article
       title: a.post-link
       detail: a.post-link
+      channels: [tech_blogs_eng]
   - name: Airbnb
     url: https://medium.com/airbnb-engineering
     config:
       article: div.row > div.col > div.col
       title: a > h3 > div
       detail: a
-  - name: Ardanlabs
-    url: https://www.ardanlabs.com/blog/
-    config:
-      article: div.post-teaser
-      title: header > h1 > a.post-link
-      detail: header > h1 > a.post-link
+      channels: [tech_blogs_eng]
