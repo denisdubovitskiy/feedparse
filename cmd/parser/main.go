@@ -19,6 +19,7 @@ import (
 	"github.com/denisdubovitskiy/feedparser/internal/unix"
 )
 
+// Флаги.
 var (
 	databasePath string
 )
@@ -28,13 +29,23 @@ func init() {
 	flag.Parse()
 }
 
+// Переменные среды.
 var (
-	token              = os.Getenv("CRAWLER_TG_TOKEN")
-	channel            = os.Getenv("CRAWLER_TG_CHANNEL")
-	browserURL         = os.Getenv("CRAWLER_BROWSER_URL")
-	browserLocation    = os.Getenv("CRAWLER_BROWSER_LOCATION")
-	isPublisherEnabled = len(os.Getenv("CRAWLER_PUBLISHER_ENABLED")) > 0
+	confToken              = os.Getenv("CRAWLER_TG_TOKEN")
+	confDefaultChannel     = os.Getenv("CRAWLER_TG_CHANNEL")
+	confBrowserURL         = os.Getenv("CRAWLER_BROWSER_URL")
+	confBrowserLocation    = os.Getenv("CRAWLER_BROWSER_LOCATION")
+	confCrawlInterval      = env("CRAWLER_CRAWL_INTERVAL", "5m0s")
+	confIsPublisherEnabled = env("CRAWLER_PUBLISHER_ENABLED", "false") != "true"
 )
+
+func env(key, defaultValue string) string {
+	if v := os.Getenv(key); v != "" {
+		return v
+	}
+
+	return defaultValue
+}
 
 func main() {
 	appCtx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT)
@@ -49,8 +60,8 @@ func main() {
 
 	var browserCtx context.Context
 	var browserCtxCancel context.CancelFunc
-	if browserLocation == "remote" {
-		browserCtx, browserCtxCancel = browser.NewRemoteContext(browserURL)
+	if confBrowserLocation == "remote" {
+		browserCtx, browserCtxCancel = browser.NewRemoteContext(confBrowserURL)
 		defer browserCtxCancel()
 	} else {
 		browserCtx, browserCtxCancel = browser.NewLocalContext()
@@ -64,7 +75,13 @@ func main() {
 	parser := parsing.NewParser()
 	runner := task.NewRunner(service, 3)
 
-	crawlTicker := time.NewTicker(time.Minute)
+	crawlInterval, err := time.ParseDuration(confCrawlInterval)
+	if err != nil {
+		log.Fatalf("crawler: unable to parse crawl interval %s: %v", confCrawlInterval, err)
+	}
+
+	crawlTicker := time.NewTicker(crawlInterval)
+
 	crawl := func() {
 		runnerErr := runner.ForEachSource(context.Background(), func(source *database.Source) error {
 			log.Printf("source: %s requesting", source.String())
@@ -124,8 +141,8 @@ func main() {
 		}
 	}()
 
-	if isPublisherEnabled {
-		publisher := telegram.NewPublisher(token, channel)
+	if confIsPublisherEnabled {
+		publisher := telegram.NewPublisher(confToken, confDefaultChannel)
 		sendTicker := time.NewTicker(2 * time.Second)
 
 		go func() {
