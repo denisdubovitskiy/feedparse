@@ -202,7 +202,7 @@ func main() {
 						if _, ok := telegram.CanRetry(err); ok {
 							continue
 						}
-						log.Printf("sender: unable to send an article: %v", err)
+						log.Printf("sender: unable to send an article: %v", sendErr)
 					}
 				case <-appCtx.Done():
 					return
