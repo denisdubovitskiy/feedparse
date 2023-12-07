@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"sync"
 
 	"github.com/denisdubovitskiy/feedparser/internal/config"
@@ -61,7 +62,12 @@ type Article struct {
 }
 
 func (a Article) String() string {
-	return fmt.Sprintf("Article(title=%s, url=%s)", a.Title, a.URL)
+	return fmt.Sprintf("Article(title=%s, url=%s, channels=%s)", a.Title, a.URL, formatArray(a.Channels))
+}
+
+func formatArray(channels []string) string {
+	ch := strings.Join(channels, ",")
+	return fmt.Sprintf("[%s]", ch)
 }
 
 func (s *Service) SelectUnsent(ctx context.Context, f func(a Article) error) error {
