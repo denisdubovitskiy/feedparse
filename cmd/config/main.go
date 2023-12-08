@@ -33,7 +33,7 @@ func main() {
 
 	conf, err := config.Parse(configContent)
 	if err != nil {
-		log.Fatalf("config: unable to parse config file %source: %v", err)
+		log.Fatalf("config: unable to parse config file: %v", err)
 	}
 
 	if err := os.MkdirAll(filepath.Dir(databasePath), os.ModePerm); err != nil {
