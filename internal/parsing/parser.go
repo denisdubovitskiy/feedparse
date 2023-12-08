@@ -8,10 +8,19 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/denisdubovitskiy/feedparser/internal/database"
 )
 
-type Source = *database.Source
+type Source struct {
+	URL             string
+	Name            string
+	ArticleSelector string
+	TitleSelector   string
+	DetailSelector  string
+}
+
+func (s Source) String() string {
+	return fmt.Sprintf("Source(name=%s, url=%s)", s.Name, s.URL)
+}
 
 type Article struct {
 	Title     string
@@ -39,13 +48,13 @@ func (p *Parser) Parse(source Source, body string) ([]Article, error) {
 
 	articles := make([]Article, 0, 10)
 
-	doc.Find(source.Config.ArticleSelector).Each(func(i int, articleCard *goquery.Selection) {
+	doc.Find(source.ArticleSelector).Each(func(i int, articleCard *goquery.Selection) {
 		log.Printf("parser: %s parsing article %d", source.String(), i)
 
-		title := articleCard.Find(source.Config.TitleSelector).Text()
+		title := articleCard.Find(source.TitleSelector).Text()
 		title = formatTitle(title)
 
-		detailURL, _ := articleCard.Find(source.Config.DetailSelector).Attr("href")
+		detailURL, _ := articleCard.Find(source.DetailSelector).Attr("href")
 		detailURL = strings.TrimSpace(detailURL)
 
 		if len(title) == 0 {

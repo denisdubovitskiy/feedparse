@@ -97,8 +97,8 @@ func TestSender(t *testing.T) {
 		article := testNewArticle(multipleChannels, emptyTags)
 		text := formatMessage(article.source, article.title, article.url, article.tags)
 
-		wantMessage1 := newMarkdownMessage(article.channels[0], text)
-		wantMessage2 := newMarkdownMessage(article.channels[1], text)
+		wantMessage1 := newMarkdownMessage(formatChannel(article.channels[0]), text)
+		wantMessage2 := newMarkdownMessage(formatChannel(article.channels[1]), text)
 
 		m.client.SendMock.When(wantMessage1).Then(nilMessage, nilError)
 		m.client.SendMock.When(wantMessage2).Then(nilMessage, nilError)

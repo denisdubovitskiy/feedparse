@@ -108,7 +108,7 @@ func main() {
 
 			log.Printf("source: %s request succeded", source.String())
 
-			articles, err := parser.Parse(source, body)
+			articles, err := parser.Parse(encodeParserSource(source), body)
 			if err != nil {
 				return err
 			}
@@ -212,4 +212,14 @@ func main() {
 	}
 
 	<-appCtx.Done()
+}
+
+func encodeParserSource(source *database.Source) parsing.Source {
+	return parsing.Source{
+		URL:             source.URL,
+		Name:            source.Name,
+		ArticleSelector: source.Config.ArticleSelector,
+		TitleSelector:   source.Config.TitleSelector,
+		DetailSelector:  source.Config.DetailSelector,
+	}
 }

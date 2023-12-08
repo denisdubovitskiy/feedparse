@@ -69,6 +69,9 @@ clean:
 build:
 	go build $(CURDIR)/...
 
+test:
+	go test -v $(CURDIR)/...
+
 build-parser:
 	go build -o $(CURDIR)/bin/parser $(CURDIR)/cmd/parser
 
@@ -81,4 +84,5 @@ runall: chrome-start update-config generate run
 
 .PHONY: bin-deps generate chrome-start chrome-stop \
 	chrome-restart chrome-rm update-config run clean \
-	goimports precommit runall build-parser build-image
+	goimports precommit runall build-parser build-image \
+	test

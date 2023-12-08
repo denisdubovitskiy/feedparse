@@ -3,9 +3,6 @@ package parsing
 import (
 	"testing"
 
-	"github.com/denisdubovitskiy/feedparser/internal/config"
-	"github.com/denisdubovitskiy/feedparser/internal/database"
-
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,14 +18,12 @@ func TestParser(t *testing.T) {
 		{
 			// Ссылки, подобные тем, что на его сайте, встречаются нечасто.
 			name: "https://research.swtch.com/",
-			source: &database.Source{
-				Name: "https://research.swtch.com/",
-				URL:  "https://research.swtch.com/",
-				Config: config.SourceConfig{
-					ArticleSelector: "ul.toc li",
-					TitleSelector:   "a",
-					DetailSelector:  "a",
-				},
+			source: Source{
+				Name:            "https://research.swtch.com/",
+				URL:             "https://research.swtch.com/",
+				ArticleSelector: "ul.toc li",
+				TitleSelector:   "a",
+				DetailSelector:  "a",
 			},
 			want: []Article{
 				{
@@ -64,14 +59,12 @@ func TestParser(t *testing.T) {
 		},
 		{
 			name: "https://eli.thegreenplace.net/tag/go",
-			source: &database.Source{
-				Name: "https://eli.thegreenplace.net/tag/go",
-				URL:  "https://eli.thegreenplace.net/tag/go",
-				Config: config.SourceConfig{
-					ArticleSelector: "table.archive-list tbody tr td",
-					TitleSelector:   "a",
-					DetailSelector:  "a",
-				},
+			source: Source{
+				Name:            "https://eli.thegreenplace.net/tag/go",
+				URL:             "https://eli.thegreenplace.net/tag/go",
+				ArticleSelector: "table.archive-list tbody tr td",
+				TitleSelector:   "a",
+				DetailSelector:  "a",
 			},
 			want: []Article{
 				{
@@ -123,14 +116,12 @@ func TestParser(t *testing.T) {
 		},
 		{
 			name: "https://threedots.tech/",
-			source: &database.Source{
-				URL:  "https://threedots.tech/",
-				Name: "https://threedots.tech/",
-				Config: config.SourceConfig{
-					ArticleSelector: "article.post-entry",
-					TitleSelector:   "header.post-header > h3.post-title a",
-					DetailSelector:  "header.post-header > h3.post-title a",
-				},
+			source: Source{
+				URL:             "https://threedots.tech/",
+				Name:            "https://threedots.tech/",
+				ArticleSelector: "article.post-entry",
+				TitleSelector:   "header.post-header > h3.post-title a",
+				DetailSelector:  "header.post-header > h3.post-title a",
 			},
 			want: []Article{
 				{
