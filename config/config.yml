@@ -1,4 +1,46 @@
 sources:
+  - name: Dropbox infra
+    url: https://dropbox.tech/infrastructure
+    config:
+      article: ul.dr-article-section__list li
+      title: h3 a span
+      detail: h3 a
+      channels: [tech_blogs_infra]
+  - name: Dropbox security
+    url: https://dropbox.tech/security
+    config:
+      article: ul.dr-article-section__list li
+      title: h3 a span
+      detail: h3 a
+      channels: [tech_blogs_sec]
+  - name: Dropbox engineering
+    url: https://dropbox.tech/application
+    config:
+      article: ul.dr-article-section__list li
+      title: h3 a span
+      detail: h3 a
+      channels: [tech_blogs_eng]
+  - name: Cockroach engineering
+    url: https://www.cockroachlabs.com/blog/engineering/
+    config:
+      article: div.post
+      title: h2.card-title
+      detail: a
+      channels: [tech_blogs_eng]
+  - name: Booking engineering
+    url: https://blog.booking.com/#development
+    config:
+      article: div.card-wrap
+      title: h4.card__title
+      detail: a
+      channels: [tech_blogs_eng]
+  - name: Booking infra
+    url: https://blog.booking.com/#infrastructure
+    config:
+      article: div.card-wrap
+      title: h4.card__title
+      detail: a
+      channels: [tech_blogs_infra]
   - name: High Scalability
     url: http://highscalability.com/
     config:
