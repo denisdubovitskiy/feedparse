@@ -1,4 +1,11 @@
 sources:
+  - name: High Scalability
+    url: http://highscalability.com/
+    config:
+      article: div.journal-entry-wrapper
+      title: div.journal-entry-text h2 a
+      detail: div.journal-entry-text h2 a
+      channels: [tech_blogs_arch]
   - name: Mathias Lafeldt
     url: https://sharpend.io/archives/
     config:
