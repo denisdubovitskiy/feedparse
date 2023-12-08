@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/url"
+	"regexp"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -42,7 +43,7 @@ func (p *Parser) Parse(source Source, body string) ([]Article, error) {
 		log.Printf("parser: %s parsing article %d", source.String(), i)
 
 		title := articleCard.Find(source.Config.TitleSelector).Text()
-		title = strings.TrimSpace(title)
+		title = formatTitle(title)
 
 		detailURL, _ := articleCard.Find(source.Config.DetailSelector).Attr("href")
 		detailURL = strings.TrimSpace(detailURL)
@@ -57,12 +58,7 @@ func (p *Parser) Parse(source Source, body string) ([]Article, error) {
 			return
 		}
 
-		// Относительные ссылки
-		if strings.HasPrefix(detailURL, "./") ||
-			strings.HasPrefix(detailURL, "/") ||
-			!strings.HasPrefix(detailURL, "http://") ||
-			!strings.HasPrefix(detailURL, "https://") {
-
+		if isLinkRelative(detailURL) {
 			u, err := url.Parse(source.URL)
 			if err != nil {
 				return
@@ -84,4 +80,21 @@ func (p *Parser) Parse(source Source, body string) ([]Article, error) {
 	})
 
 	return articles, nil
+}
+
+var regexpWhitespace = regexp.MustCompile(`\s+`)
+
+func formatTitle(s string) string {
+	s = strings.TrimSpace(s)
+	s = strings.ReplaceAll(s, "\n", " ")
+	s = regexpWhitespace.ReplaceAllLiteralString(s, " ")
+	return s
+}
+
+func isLinkRelative(detailURL string) bool {
+	if strings.HasPrefix(detailURL, "http://") ||
+		strings.HasPrefix(detailURL, "https://") {
+		return false
+	}
+	return true
 }
