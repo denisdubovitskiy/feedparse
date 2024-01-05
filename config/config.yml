@@ -97,6 +97,13 @@ sources:
       title: h2.tm-title a
       detail: h2.tm-title a
       channels: [tech_blogs_go]
+  - name: Phill Eaton
+    url: https://notes.eatonphil.com/tags/go.html
+    config:
+      article: div.container div.summary
+      title: a
+      detail: a
+      channels: [tech_blogs_go]
   - name: Ardanlabs
     url: https://www.ardanlabs.com/blog/
     config:
