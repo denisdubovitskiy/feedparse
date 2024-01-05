@@ -61,6 +61,13 @@ sources:
       title: a:nth-child(2) h3
       detail: a:nth-child(2)
       channels: [tech_blogs_go]
+  - name: Golang Ch
+    url: https://golang.ch/
+    config:
+      article: article.post
+      title: header.entry-header h2.entry-title a
+      detail: header.entry-header h2.entry-title a
+      channels: [tech_blogs_go]
   - name: Jajal Doang
     url: https://www.jajaldoang.com/tags/go/
     config:
