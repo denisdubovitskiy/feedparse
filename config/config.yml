@@ -83,6 +83,13 @@ sources:
       title: a
       detail: a
       channels: [tech_blogs_go]
+  - name: Simon Frey
+    url: https://simon-frey.com/blog/category/golang/
+    config:
+      article: article.post
+      title: h2.entry-title a
+      detail: h2.entry-title a
+      channels: [tech_blogs_go]
   - name: Eli Bendersky
     url: https://eli.thegreenplace.net/tag/go
     config:
