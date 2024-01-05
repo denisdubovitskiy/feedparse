@@ -61,6 +61,13 @@ sources:
       title: a:nth-child(2) h3
       detail: a:nth-child(2)
       channels: [tech_blogs_go]
+  - name: Jajal Doang
+    url: https://www.jajaldoang.com/tags/go/
+    config:
+      article: article.post-preview
+      title: h2.post-title
+      detail: a
+      channels: [tech_blogs_go]
   - name: The Go Blog
     url: https://go.dev/blog/
     config:
