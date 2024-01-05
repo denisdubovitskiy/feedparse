@@ -61,6 +61,62 @@ sources:
       title: a:nth-child(2) h3
       detail: a:nth-child(2)
       channels: [tech_blogs_go]
+  - name: Abhinav Gupta
+    url: https://abhinavg.net/
+    config:
+      article: div.content section
+      title: aside+a
+      detail: aside+a
+      channels: [tech_blogs_go]
+  - name: John Howard
+    url: https://blog.howardjohn.info/tags/go/
+    config:
+      article: article.post-entry
+      title: header.entry-header h2
+      detail: a.entry-link
+      channels: [tech_blogs_go]
+  - name: German Gorelkin
+    url: https://ubiklab.net/tags/go/
+    config:
+      article: article.post-entry
+      title: header.entry-header h2
+      detail: a.entry-link
+      channels: [tech_blogs_go]
+  - name: Nuances of programming
+    url: https://nuancesprog.ru/tag/golang/
+    config:
+      article: div.td_module_wrap
+      title: h3.entry-title a
+      detail: h3.entry-title a
+      channels: [tech_blogs_go]
+  - name: Zupzup
+    url: https://zupzup.org/tags/go/
+    config:
+      article: div.short
+      title: h2 a
+      detail: h2 a
+      channels: [tech_blogs_go]
+  - name: The Ethically-Trained Programmer
+    url: https://blog.carlana.net/tags/golang/
+    config:
+      article: .posts__list--list li
+      title: a
+      detail: a
+      channels: [tech_blogs_go]
+  - name: Graham King
+    url: https://darkcoding.net/tags/go
+    config:
+      article: article
+      title: h3 a
+      detail: h3 a
+      channels: [tech_blogs_go]
+  - name: jbrandhorst
+    url: https://jbrandhorst.com/post/
+    config:
+      article: .post-item
+      title: a span.post-title
+      detail: a
+      channels: [tech_blogs_go]
   - name: Golang Ch
     url: https://golang.ch/
     config:
